@@ -1,0 +1,39 @@
+#btn{
+    padding: 10px 120px;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid rgb(87, 236, 87);
+    background-color: #2BD17E;
+  }
+  
+  #exampleInputEmail1,#exampleInputPassword1,#exampleInputText1{
+    background-color:#224957;
+    border: 1px solid #224957;
+    border-radius: 10px;
+  }
+  
+  #exampleInputEmail1::placeholder{
+    color: white;
+  }
+  
+  #exampleInputPassword1::placeholder{
+    color: white;
+  }
+  
+  #exampleInputText1::placeholder{
+    color: white;
+  }
+  
+  
+  #exampleCheck1{
+    background-color: #224957;
+    margin-left: 50px;
+  }
+  
+  #exampleCheck2{
+    margin-left: 20px;
+  }
+  
+  input:focus{
+    outline: none;
+  }

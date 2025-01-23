@@ -1,0 +1,29 @@
+.container-wrapper-view {
+    /* display: flex; 
+    flex-direction: row;
+    justify-content: space-between; 
+    align-items: flex-start;
+    max-width: 100%; 
+    padding: 20px;
+    box-sizing: border-box;*/
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+} 
+
+.container-view {
+    flex: 1;
+    max-width: 50%; 
+    border: 2px dotted white;
+    border-radius: 10px;
+    background-color: #224957;
+}
+
+.box-view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 200px;
+}

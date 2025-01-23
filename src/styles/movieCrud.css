@@ -1,0 +1,122 @@
+.lower{
+    margin: auto 90px;
+  }
+
+
+  .container-wrapper {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start;
+    max-width: 100%; 
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    flex: 1;
+    max-width: 50%; 
+    border: 2px dotted white;
+    border-radius: 10px;
+    background-color: #224957;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 200px;
+}
+
+.form {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    padding: 20px; 
+    border-radius: 10px; 
+    color: white;
+}
+
+  input:focus{
+    outline: none;
+  }
+  
+  #title{
+    background-color: #224957;
+    padding: 10px 20px;
+    width: 400px;
+    border: 1px solid #224957;
+    border-radius: 10px;
+  }
+  
+  #publishing{
+    background-color: #224957;
+    padding: 10px 20px;
+    width: 400px;
+    border: 1px solid #224957;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+  
+  .cancel{
+    background-color: #224957;
+    color: white;
+    border: 1px solid white;
+    margin-right: 20px;
+  }
+  
+  .submit{
+    background-color: lightcoral;
+    color: white;
+    border: 1px solid red;
+    width: 400px;
+  }
+  
+  
+                                         /* Responsive */
+  
+  @media screen and (max-width: 768px) {
+    body {
+        background-size: cover;
+        overflow: auto;
+    }
+  
+    .lower {
+        /* margin: 20px; */
+        text-align: center;
+    }
+
+    .container-wrapper{
+        display: flex;
+        flex-direction: column;
+    }
+  
+    .container {
+        max-width: 50%;
+        margin: 0 auto;
+    }
+  
+    .box {
+        padding: 50px;
+    }
+  
+    .form {
+        float: none;
+        right: auto;
+        top: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+    }
+  
+    #title, #publishing {
+        width: 100%;
+        max-width: 50%;
+    }
+  
+    .submit {
+        margin-top: 20px;
+        width: 200px;
+    }
+  }
