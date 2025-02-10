@@ -1,8 +1,8 @@
 import { createContext } from "react";
 
 const context = createContext({
-    state :  [],
-    setState : ()=>{}
+    permissions :  {},
+    setPermissions : ()=>{},
 })
 
 export default context;

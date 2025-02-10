@@ -14,24 +14,25 @@ import EditMovie from './pages/movies/EditMovie';
 import RootLayout from './routes/RootLayout';
 import NotFound from './pages/auth/NotFound';
 import AdminTabel from './pages/admin/AdminTabel';
-
+// import PrivateRoutes from './routes/PrivateRoutes';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<RootLayout />}>
-    <Route exact path="/" element={<MoviesList />} />
-    <Route path="/signIn" element={<SignIn />} />
-    <Route path="/signUp" element={<SignUp />} />
-    <Route path="/add" element={<AddMovie />} />
-    <Route path="/view/:id" element={<ViewMovie />} /> 
-    <Route path="/edit/:id" element={<EditMovie />} />
-    <Route path="/admin" element={<AdminTabel />} />
-    <Route path="*" element={<NotFound />} />
+      <Route path="/signIn" element={<SignIn />} />
+      <Route path="/signUp" element={<SignUp />} />
+      <Route path="/" element={<MoviesList />} />
+      <Route path="/add-movie" element={<AddMovie />} />
+      <Route path="/view-movie/:id" element={<ViewMovie />} />
+      <Route path="/update-movie/:id" element={<EditMovie />} />
+      <Route path="/admin" element={<AdminTabel />} />
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 )
 
 function App() {
+
   return (
     <RouterProvider router={router} />
   );

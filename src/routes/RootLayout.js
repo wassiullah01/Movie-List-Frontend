@@ -13,18 +13,22 @@ const RootLayout = () => {
         { path: "/add" },
         { path: "/view/:id" },
         { path: "/edit/:id" },
+        { path: "/admin" },
     ];
 
     const matchedRoutes = matchRoutes(validRoutes, location);
     const is404 = !matchedRoutes;
     
     const protectPaths = paths.includes(location.pathname) || is404
+
+    const isAdminRoute = location.pathname === "/admin";
     
     return (
         <>
-            {!protectPaths && <Navbar />}
+            {isAdminRoute && <Navbar />}
+            {!protectPaths && !isAdminRoute && <Navbar />}
                 <Outlet />
-            {!protectPaths && <Footer />}
+            {!protectPaths && !isAdminRoute && <Footer />}
         </>
     );
 }

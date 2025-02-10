@@ -1,47 +1,61 @@
 import { useEffect, useState } from "react";
+// import context from "../../context/context";
 
 const AdminTabel = () => {
-
-    const [users, setUsers] = useState([])
-    const [permissions, setPermissions] = useState({})
+    // const { permissions, setPermissions } = useContext(context);
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        const data = JSON.parse(localStorage.getItem("signUp")) || [];
-        setUsers(data)
+        const data = JSON.parse(localStorage.getItem("users")) || [];
 
-        const initialPermissions = {};
-        data.forEach(user => {
-            initialPermissions[user.email] = {
-                create: false,
-                read: false,
-                update: false,
-                delete: false,
-            };
+        const updatedUsers = data.map((user) => {
+            if (!user.permissions) {
+                user.permissions =
+                    user.email === "admin@gmail.com"
+                        ? {
+                            create: true,
+                            read: true,
+                            update: true,
+                            delete: true,
+                        }
+                        : {
+                            create: false,
+                            read: false,
+                            update: false,
+                            delete: false,
+                        };
+            }
+            return user;
         });
-        setPermissions(initialPermissions);
-    }, [])
+
+        setUsers(updatedUsers);
+        localStorage.setItem("users", JSON.stringify(updatedUsers));
+    }, []);
 
     const handleCheckboxChange = (email, permissionType) => {
-        // Update permissions for the selected user
-        setPermissions(prevPermissions => ({
-            ...prevPermissions,
-            [email]: {
-                ...prevPermissions[email],
-                [permissionType]: !prevPermissions[email][permissionType],
-            },
-        }));
-    };
+        const updatedUsers = users.map((user) => {
+            if (user.email === email) {
+                return {
+                    ...user,
+                    permissions: {
+                        ...user.permissions,
+                        [permissionType]: !user.permissions[permissionType],
+                    },
+                };
+            }
+            return user;
+        });
 
-    useEffect(() => {
-        localStorage.setItem("permissions", JSON.stringify(permissions));
-    }, [permissions]);
+        console.log("Updated permissions for user: ", updatedUsers.find((u) => u.email === email));
+        setUsers(updatedUsers);
+        localStorage.setItem("users", JSON.stringify(updatedUsers));
+    };
 
     return (
         <div className="admin-container text-center">
-
             <h1 className="text-white my-5">ADMIN PANEL</h1>
             <table className="table table-hover table-bordered">
-                <thead className="table-dark">
+                <thead className="table-success">
                     <tr>
                         <th scope="col">Emails</th>
                         <th scope="col">Create</th>
@@ -51,40 +65,53 @@ const AdminTabel = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user, index) => (
-                        <tr key={index}>
-                            <th scope="row">{user.email}</th>
-                            <td><input
-                                className="form-check-input bg-dark shadow-none"
-                                type="checkbox"
-                                checked={permissions[user.email]?.create || false}
-                                onChange={() => handleCheckboxChange(user.email, "create")}
-                            /></td>
-                            <td><input
-                                className="form-check-input bg-dark shadow-none"
-                                type="checkbox"
-                                checked={permissions[user.email]?.read || false}
-                                onChange={() => handleCheckboxChange(user.email, "read")}
-                            /></td>
-                            <td><input
-                                className="form-check-input bg-dark shadow-none"
-                                type="checkbox"
-                                checked={permissions[user.email]?.update || false}
-                                onChange={() => handleCheckboxChange(user.email, "update")}
-                            /></td>
-                            <td><input
-                                className="form-check-input bg-dark shadow-none"
-                                type="checkbox"
-                                checked={permissions[user.email]?.delete || false}
-                                onChange={() => handleCheckboxChange(user.email, "delete")}
-                            /></td>
-                        </tr>
-                    ))}
+                    {users
+                        .filter((user) => user.email !== "admin@gmail.com")
+                        .map((user, index) => (
+                            <tr key={index}>
+                                <th scope="row">{user.email}</th>
+                                <td>
+                                    <input
+                                        className="form-check-input shadow-none"
+                                        type="checkbox"
+                                        style={{ backgroundColor: "rgb(91 163 130 / 72%)" }}
+                                        checked={user.permissions?.create || false}
+                                        onChange={() => handleCheckboxChange(user.email, "create")}
+                                    />
+                                </td>
+                                <td>
+                                    <input
+                                        className="form-check-input shadow-none"
+                                        type="checkbox"
+                                        style={{ backgroundColor: "rgb(91 163 130 / 72%)" }}
+                                        checked={user.permissions?.read || false}
+                                        onChange={() => handleCheckboxChange(user.email, "read")}
+                                    />
+                                </td>
+                                <td>
+                                    <input
+                                        className="form-check-input shadow-none"
+                                        type="checkbox"
+                                        style={{ backgroundColor: "rgb(91 163 130 / 72%)" }}
+                                        checked={user.permissions?.update || false}
+                                        onChange={() => handleCheckboxChange(user.email, "update")}
+                                    />
+                                </td>
+                                <td>
+                                    <input
+                                        className="form-check-input shadow-none"
+                                        type="checkbox"
+                                        style={{ backgroundColor: "rgb(91 163 130 / 72%)" }}
+                                        checked={user.permissions?.delete || false}
+                                        onChange={() => handleCheckboxChange(user.email, "delete")}
+                                    />
+                                </td>
+                            </tr>
+                        ))}
                 </tbody>
             </table>
-            
         </div>
     );
-}
+};
 
 export default AdminTabel;

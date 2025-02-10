@@ -53,8 +53,13 @@
 
     #navbarSupportedContent{
         position: relative;
-        left: 0;
+        left: 360px;
       }
+
+      .navbar-nav .dropdown-menu {
+        position: relative;
+        left: -360px;
+    }
 
       .dropdown-menu{
         border: 1px solid #083849;
