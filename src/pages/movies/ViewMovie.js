@@ -6,7 +6,7 @@ import '../../styles/view.css';
 
 const ViewMovie = () => {
     const { id } = useParams();
-    const [movie, setMovie] = useState([]);
+    const [movie, setMovie] = useState([]);   
 
     useEffect(() => {
         axiosInstance({
