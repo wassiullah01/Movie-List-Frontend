@@ -25,7 +25,7 @@ const SignUp = () => {
                 method: "post",
                 url: `${process.env.REACT_APP_BACKEND_URL}/api/users/signup`,
                 data: { username, email, password },
-                withCredentials: true,
+                // withCredentials: true,
             });
             console.log("Response:", response);
             alert("Sign-up successful!");

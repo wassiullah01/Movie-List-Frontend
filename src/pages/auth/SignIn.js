@@ -24,8 +24,13 @@ const SignIn = () => {
                 withCredentials: true,
             });
             console.log("Response:", response);
+            if (email === "admin@gmail.com") {
+                alert("Welcome Admin");
+                navigate("/admin");
+            } else {
                 alert("Welcome to Movie-List");
                 navigate("/");
+            }
         } catch (error) {
             console.error(error);
             alert(error.response?.data?.message || "Login failed");
