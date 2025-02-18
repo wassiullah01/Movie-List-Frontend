@@ -15,11 +15,11 @@ const AdminTabel = () => {
                     const fetchedUsers = response.data.data.map((user) => ({
                         email: user.email,
                         permissions: {
-                            create: user.permissions.includes("create"),
-                            view: user.permissions.includes("view"),
-                            update: user.permissions.includes("update"),
-                            delete: user.permissions.includes("delete"),
-                        },
+                            create: user.permissions?.includes("create") || false,
+                            view: user.permissions?.includes("view") || false,
+                            update: user.permissions?.includes("update") || false,
+                            delete: user.permissions?.includes("delete") || false,
+                        },                        
                     }));
                     setUsers(fetchedUsers);
                     console.log("Users fetched:", fetchedUsers);
@@ -48,7 +48,7 @@ const AdminTabel = () => {
             method: "post",
             url: `${process.env.REACT_APP_BACKEND_URL}/api/permissions/update-user-permissions`,
             withCredentials: true,
-            data: { email, permisionType: permissionType },
+            data: { email, permissionType },
         })
             .then(() => {
                 console.log(`Permission updated: ${permissionType} for ${email}`);

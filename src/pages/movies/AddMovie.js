@@ -57,7 +57,7 @@ const AddMovie = () => {
             console.error("Error adding movie:", error);
             alert("Error adding movie. Check the console for details.");
         }
-    };
+    };  
 
     return (
         <div>

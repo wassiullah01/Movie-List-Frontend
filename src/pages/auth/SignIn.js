@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import '../../styles/login.css';
+import { useDispatch } from "react-redux";
+import { setUserRole } from "../../reducers/userAuthSlice";
 import axios from "axios";
 
 const SignIn = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
 
@@ -23,7 +26,11 @@ const SignIn = () => {
                 data: { email, password },
                 withCredentials: true,
             });
-            console.log("Response:", response);
+
+            const userRole = response.data.data.user.role;
+            dispatch(setUserRole(userRole));
+
+            console.log("Response:", response.data.data.user.role);
             if (email === "admin@gmail.com") {
                 alert("Welcome Admin");
                 navigate("/admin");
